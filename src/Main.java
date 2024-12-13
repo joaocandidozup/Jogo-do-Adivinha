@@ -30,4 +30,17 @@ public class Main {
         Random numeroAleatorio = new Random();
         return numeroAleatorio.nextInt(intervalo) +1;
     }
+    public static int intervalo(String nivel){
+        switch (nivel){
+            case "facil":
+                return 10;
+            case "medio":
+                return 50;
+            case "dificil":
+                return 100;
+            default:
+                System.out.println("Nivel inválido");
+                return -1;
+        }
+    }
 }
