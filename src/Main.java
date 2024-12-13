@@ -9,10 +9,11 @@ public class Main {
             exibirMenu();
             opcao = leitura.nextInt();
             if(opcao == 1){
-                System.out.println("Escolha o nivel de dificuldade ( facil, medio, dificil");
+                System.out.println("Escolha o nivel de dificuldade ( facil, medio, dificil)");
                 String nivel = leitura.next();
-                System.out.println(nivel);
-
+                int numeroAleatorio = gerarNumeroAleatorio(intervalo(nivel));
+                System.out.println("Digite um numero inteiro");
+                int palpite = lerPalpite(leitura);
 
             }
         }
@@ -42,5 +43,12 @@ public class Main {
                 System.out.println("Nivel inválido");
                 return -1;
         }
+    }
+    public static int lerPalpite(Scanner leitura){
+        while(!leitura.hasNextInt()){
+            System.out.println("Digite um numero inteiro:");
+            leitura.next();
+        }
+        return leitura.nextInt();
     }
 }
