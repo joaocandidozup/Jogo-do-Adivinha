@@ -66,6 +66,7 @@ public class Main {
             numerosCertos.add(palpite);
             return 10;
         } else if (palpite == numeroAleatorio +1 || palpite == numeroAleatorio -1){
+            numerosErrados.add(palpite);
             return 5;
         }else {
             numerosErrados.add(palpite);
