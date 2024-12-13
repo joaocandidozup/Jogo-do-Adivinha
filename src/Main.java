@@ -1,6 +1,8 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+
     }
     public static void exibirMenu(){
         String menu = """
@@ -10,5 +12,9 @@ public class Main {
                 Digite uma opção
                 """;
         System.out.println(menu);
+    }
+    public static int gerarNumeroAleatorio(int intervalo){
+        Random numeroAleatorio = new Random();
+        return numeroAleatorio.nextInt(intervalo) +1;
     }
 }
