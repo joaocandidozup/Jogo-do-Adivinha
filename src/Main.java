@@ -64,16 +64,37 @@ public class Main {
         }
         return leitura.nextInt();
     }
-    public static int calcularPontos(int palpite, int numeroAleatorio,List<Integer>numerosCertos,List<Integer>numerosErrados){
-        if(palpite == numeroAleatorio){
-            numerosCertos.add(palpite);
+    public static int registrarTentativas(int palpite, int numeroAleatorio, List<Integer> numerosCertos, List<Integer> numerosErrados) {
+        if (palpite == numeroAleatorio) {
+            if (!numerosCertos.contains(palpite)) {
+                numerosCertos.add(palpite);
+            }
+            System.out.println("Parabéns! Você acertou!");
             return 10;
-        } else if (palpite == numeroAleatorio +1 || palpite == numeroAleatorio -1){
-            numerosErrados.add(palpite);
+        } else if (palpite == numeroAleatorio + 1) {
+            if (!numerosErrados.contains(palpite)) {
+                numerosErrados.add(palpite);
+            }
+            System.out.println("Errou! numero aleatorio é menor");
             return 5;
-        }else {
-            numerosErrados.add(palpite);
+        } else if (palpite == numeroAleatorio - 1) {
+            if (!numerosErrados.contains(palpite)) {
+                numerosErrados.add(palpite);
+            }
+            System.out.println("Errou! numero aleatorio é maior");
+            return 5;
+        } else {
+            if (!numerosErrados.contains(palpite)) {
+                numerosErrados.add(palpite);
+            }
+            if (palpite < numeroAleatorio) {
+                System.out.println("Errou! numero aleatorio é maior");
+            } else {
+                System.out.println("Errou! numero aleatorio é menor");
+            }
+
             return 0;
         }
     }
+
 }
