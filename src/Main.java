@@ -14,8 +14,6 @@ public class Main {
         System.out.println("Escolha o nivel de dificuldade ( facil, medio, dificil)");
         String nivel = leitura.next();
         int numeroAleatorio = gerarNumeroAleatorio(intervalo(nivel));
-        exibirMenu();
-        opcao = lerEntrada(leitura);
         while (opcao == 1) {
             if (nivel.equalsIgnoreCase("facil") || nivel.equalsIgnoreCase("medio") || nivel.equalsIgnoreCase("dificil")) {
                 System.out.println("Digite um numero inteiro");
@@ -28,6 +26,8 @@ public class Main {
                 }
             } else {
                 System.out.println("nivel não encontrado!!!!");
+                System.out.println("Escolha o nivel de dificuldade ( facil, medio, dificil)");
+                nivel = leitura.next();
             }
         }
         System.out.println("Pontuação Final: " + pontos + " pontos.");
@@ -50,7 +50,7 @@ public class Main {
         if (intervalo != -1) {
             return numeroAleatorio.nextInt(intervalo) + 1;
         } else {
-            return numeroAleatorio.nextInt(1);
+            return numeroAleatorio.nextInt(10)+ 1 ;
         }
     }
 
