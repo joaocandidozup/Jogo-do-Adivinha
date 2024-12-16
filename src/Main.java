@@ -18,7 +18,7 @@ public class Main {
                 String nivel = leitura.next();
                 int numeroAleatorio = gerarNumeroAleatorio(intervalo(nivel));
                 System.out.println("Digite um numero inteiro");
-                int palpite = lerPalpite(leitura);
+                int palpite = lerEntrada(leitura);
                 pontos += calcularPontos(palpite,numeroAleatorio,listaDeAcertos,listaDeErros);
 
             }
@@ -28,21 +28,25 @@ public class Main {
         System.out.println("Números errados:"+ listaDeErros);
     }
 
-    public static void exibirMenu(){
+    public static void exibirMenu() {
         String menu = """
-                Bem vindo ao Jogo do Adivinha!!!
-                1 - Iniciar o jogo
+                
+                1 - Jogar
                 2 - Sair do jogo
-                Digite uma opção
+                Digite uma opção:
                 """;
-        System.out.println(menu);
+        System.out.print(menu);
     }
-    public static int gerarNumeroAleatorio(int intervalo){
+    public static int gerarNumeroAleatorio(int intervalo) {
         Random numeroAleatorio = new Random();
-        return numeroAleatorio.nextInt(intervalo) +1;
+        if (intervalo != -1) {
+            return numeroAleatorio.nextInt(intervalo) + 1;
+        } else {
+            return numeroAleatorio.nextInt(1);
+        }
     }
-    public static int intervalo(String nivel){
-        switch (nivel){
+    public static int intervalo(String nivel) {
+        switch (nivel.toLowerCase()) {
             case "facil":
                 return 10;
             case "medio":
@@ -50,13 +54,12 @@ public class Main {
             case "dificil":
                 return 100;
             default:
-                System.out.println("Nivel inválido");
                 return -1;
         }
     }
-    public static int lerPalpite(Scanner leitura){
-        while(!leitura.hasNextInt()){
-            System.out.println("Digite um numero inteiro:");
+    public static int lerEntrada(Scanner leitura) {
+        while (!leitura.hasNextInt()) {
+            System.out.println("digite um numero inteiro ");
             leitura.next();
         }
         return leitura.nextInt();
