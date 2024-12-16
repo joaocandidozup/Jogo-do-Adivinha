@@ -8,24 +8,31 @@ public class Main {
         List<Integer> listaDeAcertos = new ArrayList<>();
         List<Integer> listaDeErros = new ArrayList<>();
         Scanner leitura = new Scanner(System.in);
-        int opcao = -1;
+        int opcao = 1;
         int pontos = 0;
-        while (opcao !=2){
-            exibirMenu();
-            opcao = leitura.nextInt();
-            if(opcao == 1){
-                System.out.println("Escolha o nivel de dificuldade ( facil, medio, dificil)");
-                String nivel = leitura.next();
-                int numeroAleatorio = gerarNumeroAleatorio(intervalo(nivel));
+        System.out.println("Bem vindo ao Jogo do Adivinha!!!");
+        System.out.println("Escolha o nivel de dificuldade ( facil, medio, dificil)");
+        String nivel = leitura.next();
+        int numeroAleatorio = gerarNumeroAleatorio(intervalo(nivel));
+        exibirMenu();
+        opcao = lerEntrada(leitura);
+        while (opcao == 1) {
+            if (nivel.equalsIgnoreCase("facil") || nivel.equalsIgnoreCase("medio") || nivel.equalsIgnoreCase("dificil")) {
                 System.out.println("Digite um numero inteiro");
                 int palpite = lerEntrada(leitura);
-                pontos += calcularPontos(palpite,numeroAleatorio,listaDeAcertos,listaDeErros);
-
+                pontos += registrarTentativas(palpite, numeroAleatorio, listaDeAcertos, listaDeErros);
+                if (palpite == numeroAleatorio) {
+                    numeroAleatorio = gerarNumeroAleatorio(intervalo(nivel));
+                    exibirMenu();
+                    opcao = lerEntrada(leitura);
+                }
+            } else {
+                System.out.println("nivel não encontrado!!!!");
             }
         }
-        System.out.println("Pontuação Final: "+ pontos +" pontos.");
-        System.out.println("Números acertados:"+ listaDeAcertos);
-        System.out.println("Números errados:"+ listaDeErros);
+        System.out.println("Pontuação Final: " + pontos + " pontos.");
+        System.out.println("Números acertados:" + listaDeAcertos);
+        System.out.println("Números errados:" + listaDeErros);
     }
 
     public static void exibirMenu() {
@@ -37,6 +44,7 @@ public class Main {
                 """;
         System.out.print(menu);
     }
+
     public static int gerarNumeroAleatorio(int intervalo) {
         Random numeroAleatorio = new Random();
         if (intervalo != -1) {
@@ -45,6 +53,7 @@ public class Main {
             return numeroAleatorio.nextInt(1);
         }
     }
+
     public static int intervalo(String nivel) {
         switch (nivel.toLowerCase()) {
             case "facil":
@@ -57,6 +66,7 @@ public class Main {
                 return -1;
         }
     }
+
     public static int lerEntrada(Scanner leitura) {
         while (!leitura.hasNextInt()) {
             System.out.println("digite um numero inteiro ");
@@ -64,6 +74,7 @@ public class Main {
         }
         return leitura.nextInt();
     }
+
     public static int registrarTentativas(int palpite, int numeroAleatorio, List<Integer> numerosCertos, List<Integer> numerosErrados) {
         if (palpite == numeroAleatorio) {
             if (!numerosCertos.contains(palpite)) {
